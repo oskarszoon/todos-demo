@@ -14,3 +14,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+$router->get('/todos',  ['uses' => 'TodoController@getAll']);
+$router->post('/todos', ['uses' => 'TodoController@create']);
+$router->delete('/todos/{id}', ['uses' => 'TodoController@delete']);
+$router->put('/todos/{id}', ['uses' => 'TodoController@update']);
