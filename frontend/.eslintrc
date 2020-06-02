@@ -29,6 +29,13 @@
     "jsx-a11y",
     "import"
   ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "env": {
     "jest": true
   }
