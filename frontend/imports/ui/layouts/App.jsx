@@ -1,6 +1,6 @@
 import React from 'react';
-import { Navbar } from '../pages/Navbar.jsx';
-import { TodosList } from '../pages/TodosList.jsx';
+import { Navbar } from '../components/Navbar.jsx';
+import { TodosList } from '../components/TodosList.jsx';
 
 export const App = () => {
   return (
