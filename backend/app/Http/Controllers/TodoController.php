@@ -10,7 +10,7 @@ class TodoController extends Controller
 
     public function getAll()
     {
-        return response()->json(Todo::all());
+        return response()->json(Todo::orderBy('id', 'desc')->get());
     }
 
     public function create(Request $request)

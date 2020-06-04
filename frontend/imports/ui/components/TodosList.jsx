@@ -1,24 +1,12 @@
 import React from 'react';
-import { todosUrl } from '../../api/urls';
-import { useFetch } from '../hooks/useFetch';
+import { useSelector } from 'react-redux';
+
 import { TodoItem } from './TodoItem';
 import { TodoCreate } from './TodoCreate';
 
 export const TodosList = () => {
-  const { loading, data, setData } = useFetch(
-    todosUrl,
-    [],
-  );
-
-  const removeTodoFromState = (id) => {
-    setData(data.filter((todo) => {
-      return todo.id !== id;
-    }));
-  };
-
-  const addTodoToState = (todo) => {
-    setData([...data, todo]);
-  };
+  const todos = useSelector((state) => { return state.todos; });
+  const loading = useSelector((state) => { return state.loading; });
 
   let content = (
     <div>Loading</div>
@@ -26,10 +14,10 @@ export const TodosList = () => {
   if (!loading) {
     content = (
       <>
-        <TodoCreate onCreate={addTodoToState} />
-        {data.map((todo) => {
+        <TodoCreate />
+        {todos.map((todo) => {
           return (
-            <TodoItem key={todo.id} todo={todo} onDelete={removeTodoFromState} />
+            <TodoItem key={todo.id} todo={todo} />
           );
         })}
       </>

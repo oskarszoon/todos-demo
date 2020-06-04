@@ -1,21 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { createTodo } from '../../api/todos';
+import { useDispatch } from 'react-redux';
 import { useInput } from '../hooks/useInput';
+import { createTodo } from '../../redux/actions';
 
-export const TodoCreate = ({
-  onCreate,
-}) => {
+export const TodoCreate = () => {
   const [title, setTitleFromEvent, setTitle] = useInput('');
+  const dispatch = useDispatch();
 
-  const onBlur = async () => {
+  const onBlur = () => {
     if (typeof title !== 'string' || !title.length) {
       return;
     }
-    const todo = await createTodo({
+    dispatch(createTodo({
       title,
-    });
-    onCreate(todo);
+    }));
     setTitle('');
   };
 
@@ -37,11 +35,4 @@ export const TodoCreate = ({
       />
     </div>
   );
-};
-
-TodoCreate.propTypes = {
-  onCreate: PropTypes.func.isRequired,
-};
-
-TodoCreate.defaultProps = {
 };

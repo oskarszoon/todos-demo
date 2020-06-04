@@ -1,36 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { deleteTodo, updateTodo } from '../../api/todos';
+import { useDispatch } from 'react-redux';
+import { updateTodo, deleteTodo } from '../../redux/actions';
 
-export const TodoItem = ({
-  todo: todoProp,
-  onDelete,
-}) => {
-  const [todo, updateTodoState] = useState(todoProp);
-
-  // Update state if todo from props changes (i.e. data reload)
-  useEffect(() => {
-    updateTodoState(todoProp);
-  }, [todoProp]);
+export const TodoItem = ({ todo }) => {
+  const dispatch = useDispatch();
 
   const setCompletedStatus = (event) => {
     const changes = {
       completed: event.target.checked,
     };
-    // Should be combined into a separate hook that handles both
-    updateTodoState(changes);
-    updateTodo(todo.id, changes);
+    dispatch(updateTodo(todo.id, changes));
   };
 
   const onBlur = (event) => {
-    updateTodo(todo.id, {
+    dispatch(updateTodo(todo.id, {
       title: event.target.value,
-    });
+    }));
   };
 
   const deleteItem = () => {
-    onDelete(todo.id);
-    deleteTodo(todo.id);
+    dispatch(deleteTodo(todo.id));
   };
 
   return (
@@ -66,7 +56,6 @@ TodoItem.propTypes = {
     completed: PropTypes.number,
     title: PropTypes.string,
   }).isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
 
 TodoItem.defaultProps = {
