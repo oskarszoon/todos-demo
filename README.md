@@ -1,6 +1,6 @@
 ![Banner Image](https://i.imgur.com/80OZCaq.png)
 
-# todos-demo
+# todos-demo - Work in progress :construction:
 Sample Todos app created for a tech assignment and as a learning exercise.
 
 Backend built as simple REST Apis using [Lumen](https://lumen.laravel.com/), easiest to get it up and running is with [Laravel's Homestead](https://laravel.com/docs/7.x/homestead)
