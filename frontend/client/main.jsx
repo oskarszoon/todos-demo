@@ -4,17 +4,15 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import { App } from '../imports/ui/layouts/App';
-import { store } from '../imports/redux/store';
-import { loadTodos } from '../imports/redux/actions';
+import { store } from '../imports/api/store';
+import { Auth0Provider } from '../imports/api/auth0-context';
 
 Meteor.startup(() => {
   render((
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <Auth0Provider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Auth0Provider>
   ), document.getElementById('react-target'));
-});
-
-Meteor.startup(async () => {
-  store.dispatch(loadTodos);
 });

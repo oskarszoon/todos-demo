@@ -13,7 +13,7 @@ class Todo extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'category', 'completed'
+        'title', 'category', 'completed', 'user_id'
     ];
 
     /**
@@ -21,5 +21,7 @@ class Todo extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = [
+        'user_id'
+    ];
 }

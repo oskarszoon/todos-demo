@@ -11,21 +11,23 @@ vagrant up
 php artisan migrate
 ```
 
-Frontend built with [Meteor](https://www.meteor.com/) & React
+Frontend built with [Meteor](https://www.meteor.com/) & React+Redux
 ```
 cd frontend
 meteor npm install
-meteor
+# make a copy of settings-dev.json.example and fill in the auth0 details
+meteor --settings settings-dev.json
 ```
 
 --- 
 
 Open tasks:
-- [ ] Make it look pretty
+- [ ] Make creating tasks optimistic
 - [ ] Add GTD labeling as categories
-- [ ] Implement user authenticatioon
+- [ ] Make it look a bit prettier
 
 
 New tech used:
 - [redux-api-middleware](https://www.npmjs.com/package/redux-api-middleware)
 - [lumen](https://lumen.laravel.com/)
+- [auth0](https://github.com/auth0/auth0-spa-js)

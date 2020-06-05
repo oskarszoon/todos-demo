@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faSquare, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import classNames from 'classnames';
 
-import { updateTodo, deleteTodo } from '../../redux/actions';
+import { updateTodo, deleteTodo } from '../../api/actions';
 
 export const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();

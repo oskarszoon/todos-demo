@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useInput } from '../hooks/useInput';
-import { createTodo } from '../../redux/actions';
+import { createTodo } from '../../api/actions';
 
 export const TodoCreate = () => {
   const [title, setTitleFromEvent, setTitle] = useInput('');

@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-
-    public function getAll()
+    public function getAll(Request $request)
     {
-        return response()->json(Todo::orderBy('id', 'desc')->get());
+        $userId = $request->get('userId');
+        return response()->json(Todo::where('user_id', $userId)->orderBy('id', 'desc')->get());
     }
 
     public function create(Request $request)
@@ -19,22 +19,32 @@ class TodoController extends Controller
             'title' => 'required'
         ]);
 
-        $todo = Todo::create($request->all());
+        $todo = Todo::create([
+            'title' => $request->get('title'),
+            'user_id' => $request->get('userId'),
+        ]);
 
         return response()->json($todo, 201);
     }
 
     public function update($id, Request $request)
     {
-        $todo = Todo::findOrFail($id);
+        $todo = Todo::where([
+            'id' => $id,
+            'user_id' => $request->get('userId')
+        ])->firstOrFail();
         $todo->update($request->all());
 
         return response()->json($todo, 200);
     }
 
-    public function delete($id)
+    public function delete($id, Request $request)
     {
-        Todo::findOrFail($id)->delete();
+        Todo::where([
+            'id' => $id,
+            'user_id' => $request->get('userId')
+        ])->firstOrFail()->delete();
+
         return response('Deleted Successfully', 200);
     }
 }

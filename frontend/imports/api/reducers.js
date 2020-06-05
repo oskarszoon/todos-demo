@@ -1,5 +1,20 @@
 import { combineReducers } from 'redux';
 
+const authReducer = (state = {
+  authenticating: true,
+  isAuthenticated: false,
+}, action) => {
+  switch (action.type) {
+    case 'authenticated':
+      return {
+        authenticating: false,
+        isAuthenticated: action.isAuthenticated,
+      };
+    default:
+      return state;
+  }
+};
+
 const loadingReducer = (state = true, action) => {
   switch (action.type) {
     case 'load/success':
@@ -32,6 +47,7 @@ const todoReducer = (state = [], action) => {
 };
 
 export default combineReducers({
+  auth: authReducer,
   loading: loadingReducer,
   todos: todoReducer,
 });

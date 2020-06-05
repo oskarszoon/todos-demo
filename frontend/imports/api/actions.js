@@ -1,7 +1,13 @@
 import { createAction } from 'redux-api-middleware';
-import { todosUrl } from './apiUrls';
+import { getAuthToken, todosUrl } from './apiUrls';
 
-const headers = { 'Content-Type': 'application/json' };
+const headers = () => {
+  const token = getAuthToken();
+  return {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+};
 
 export const loadTodos = createAction({
   endpoint: todosUrl,
