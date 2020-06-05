@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare, faSquare, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import classNames from 'classnames';
+
 import { updateTodo, deleteTodo } from '../../redux/actions';
 
 export const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
 
-  const setCompletedStatus = (event) => {
-    const changes = {
-      completed: event.target.checked,
-    };
-    dispatch(updateTodo(todo.id, changes));
+  const toggleCompleted = () => {
+    dispatch(updateTodo(todo.id, {
+      completed: +!todo.completed,
+    }));
   };
 
   const onBlur = (event) => {
@@ -23,29 +26,34 @@ export const TodoItem = ({ todo }) => {
     dispatch(deleteTodo(todo.id));
   };
 
+  const itemClassNames = classNames(
+    'todo-item', 'd-flex', 'align-items-center',
+    {
+      'todo-item--complete': todo.completed,
+    },
+  );
   return (
-    <div>
-      <label className="checkbox" htmlFor={todo.id}>
-        <input
-          id={todo.id}
-          type="checkbox"
-          checked={todo.completed}
-          name="checked"
-          onChange={setCompletedStatus}
+    <div className={itemClassNames}>
+      <div className="todo-item__completed">
+        <FontAwesomeIcon
+          icon={todo.completed ? faCheckSquare : faSquare}
+          onClick={toggleCompleted}
         />
-      </label>
-      <input
-        type="text"
-        defaultValue={todo.title}
-        onBlur={onBlur}
-      />
-      <a
-        className="delete-item"
-        href="#delete"
-        onClick={deleteItem}
-      >
-        X
-      </a>
+      </div>
+      <div className="todo-item__title">
+        <input
+          type="text"
+          className="form-control w-100"
+          defaultValue={todo.title}
+          onBlur={onBlur}
+        />
+      </div>
+      <div className="todo-item__delete">
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          onClick={deleteItem}
+        />
+      </div>
     </div>
   );
 };

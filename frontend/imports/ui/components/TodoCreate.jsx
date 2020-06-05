@@ -24,15 +24,19 @@ export const TodoCreate = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Add a new todo"
-        value={title}
-        onChange={setTitleFromEvent}
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-      />
+    <div className="todo-item d-flex align-items-center">
+      <div className="todo-item__spacer" />
+      <div className="todo-item__title">
+        <input
+          type="text"
+          className="form-control w-100"
+          placeholder="Add a new todo"
+          value={title}
+          onChange={setTitleFromEvent}
+          onBlur={onBlur}
+          onKeyDown={onKeyDown}
+        />
+      </div>
     </div>
   );
 };

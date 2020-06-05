@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { ListGroup, ListGroupItem } from 'reactstrap';
 import { TodoItem } from './TodoItem';
 import { TodoCreate } from './TodoCreate';
 
@@ -13,20 +14,23 @@ export const TodosList = () => {
   );
   if (!loading) {
     content = (
-      <>
-        <TodoCreate />
+      <ListGroup>
+        <ListGroupItem>
+          <TodoCreate />
+        </ListGroupItem>
         {todos.map((todo) => {
           return (
-            <TodoItem key={todo.id} todo={todo} />
+            <ListGroupItem key={todo.id}>
+              <TodoItem todo={todo} />
+            </ListGroupItem>
           );
         })}
-      </>
+      </ListGroup>
     );
   }
 
   return (
     <div>
-      <h1>Todos list</h1>
       {content}
     </div>
   );
