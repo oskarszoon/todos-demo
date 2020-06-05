@@ -16,19 +16,23 @@ export const useAuth0 = () => { return useContext(Auth0Context); };
 
 // create a provider
 export class Auth0Provider extends Component {
-  state = {
-    auth0Client: null,
-    isLoading: true,
-    isAuthenticated: false,
-    user: null,
-  };
+  constructor() {
+    super();
 
-  config = {
-    domain,
-    client_id,
-    audience,
-    redirect_uri: window.location.origin,
-  };
+    this.config = {
+      domain,
+      client_id,
+      audience,
+      redirect_uri: window.location.origin,
+    };
+
+    this.state = {
+      auth0Client: null,
+      isLoading: true,
+      isAuthenticated: false,
+      user: null,
+    };
+  }
 
   componentDidMount() {
     this.initializeAuth0();
@@ -68,6 +72,7 @@ export class Auth0Provider extends Component {
     const user = await auth0Client.getUser();
     const token = await auth0Client.getTokenSilently();
     setAuthToken(token);
+    store.dispatch(loadTodos);
 
     this.setState({ user, isAuthenticated: true, isLoading: false });
     window.history.replaceState({}, document.title, window.location.pathname);
