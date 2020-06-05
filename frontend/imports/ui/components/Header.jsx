@@ -9,18 +9,23 @@ import { useAuth0 } from '../../api/auth0-context';
 
 export const Header = () => {
   const auth0 = useAuth0();
-  const { isLoading, isAuthenticated } = auth0;
+  const {
+    isLoading,
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+  } = auth0;
 
   let authContent = null;
   if (!isLoading) {
     if (!isAuthenticated) {
       authContent = (
-        <Button onClick={auth0.loginWithRedirect}>Sign In</Button>
+        <Button onClick={loginWithRedirect}>Sign In</Button>
       );
     } else {
       authContent = (
         <div>
-          <Button onClick={auth0.logout}>Sign Out</Button>
+          <Button onClick={logout}>Sign Out</Button>
         </div>
       );
     }

@@ -16,8 +16,8 @@ export const useAuth0 = () => { return useContext(Auth0Context); };
 
 // create a provider
 export class Auth0Provider extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.config = {
       domain,
